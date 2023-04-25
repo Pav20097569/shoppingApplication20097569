@@ -1,7 +1,8 @@
 import java.util.*
 import java.util.Scanner
 import java.lang.System.exit
-
+import ScannerInput.readNextInt
+import ScannerInput.readNextLine
 
 
 fun main(args: Array<String>) {
@@ -29,9 +30,9 @@ fun runMenu(){
 
 
 fun mainMenu() : Int {
+return readNextInt(
 
-
-   print( """
+   """
             -------------------------------------
             |      SHOPPING APP MENU            |
             -------------------------------------
@@ -44,8 +45,8 @@ fun mainMenu() : Int {
             |   6. Calculate total price        |
             |   0. Exit                         |
             -------------------------------------
-            ==>> """.trimMargin(">"))
-    return scanner.nextInt()
+            ==>> """.trimMargin(">")
+   )
 }
 
 
