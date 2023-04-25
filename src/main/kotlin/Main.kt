@@ -3,7 +3,8 @@ import java.util.Scanner
 import java.lang.System.exit
 import ScannerInput.readNextInt
 import ScannerInput.readNextLine
-
+import models.List
+import controllers.ListAPI
 
 fun main(args: Array<String>) {
     runMenu()
@@ -51,15 +52,14 @@ return readNextInt(
 
 
 fun createShoppingList() {
-    // code to create a new shopping list
-    println("A new shopping list has been created.")
+
+
 }
 
 fun addItemToList() {
-    println("Enter the name of the shopping list to add an item to:")
-    val listName = readLine()
-    // code to add an item to the shopping list with name "listName"
+
 }
+
 
 fun removeItemFromList() {
     println("Enter the name of the shopping list to remove an item from:")
