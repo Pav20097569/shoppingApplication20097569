@@ -5,6 +5,8 @@ import ScannerInput.readNextInt
 import ScannerInput.readNextLine
 import models.List
 import controllers.ListAPI
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 fun main(args: Array<String>) {
     runMenu()
@@ -52,9 +54,15 @@ return readNextInt(
 
 
 fun createShoppingList() {
-
-
+    val listName = readNextLine("Enter a name for the Shopping List:  ")
+    val currentDateTime = LocalDateTime.now()
+    val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+    println("New shopping list '$listName' created on ${currentDateTime.format(dateFormatter)} at ${currentDateTime.format(timeFormatter)}")
 }
+
+
+
 
 fun addItemToList() {
 
