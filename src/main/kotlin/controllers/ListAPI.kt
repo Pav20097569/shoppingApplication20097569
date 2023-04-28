@@ -4,12 +4,18 @@ import models.ShoppingList
 import java.util.*
 import kotlin.collections.ArrayList
 import ScannerInput.readNextInt
-import ScannerInput.readNextLine
 import models.Item
 
 class ListAPI {
     private val scanner = Scanner(System.`in`)
     private val lists = ArrayList<ShoppingList>()
+
+
+
+
+    fun add(shoppingList: ShoppingList): Boolean {
+        return lists.add(shoppingList)
+    }
 
     fun findShoppingListById(id: Int): ShoppingList? {
         for (shoppingList in lists) {
@@ -19,6 +25,11 @@ class ListAPI {
         }
         return null
     }
+
+    fun listAllShoppingLists(): String =
+        if (lists.isEmpty()) "There are no shopping lists created yet."
+            else formatListString(lists)
+
 
     fun selectShoppingList(): ShoppingList? {
         if (lists.isEmpty()) {
@@ -39,28 +50,21 @@ class ListAPI {
         val selectedList = findShoppingListById(listId)
         if (selectedList == null) {
             println("Invalid shopping list ID entered.")
+            return null // Return null if the shopping list is not found
         }
 
-        return selectedList
+        return selectedList // Return the selected shopping list
     }
 
-
-
-    fun listAllShoppingLists() {
-        if (lists.isEmpty()) {
-            println("There are no shopping lists created yet.")
-            return
-        }
-
-        println("All shopping lists: ")
-        for (list in lists) {
-            println("ID: ${list.listId}, Name: ${list.listName}")
-            println("Items: ")
-            for (item in list.items) {
-                println("  Name: ${item.name}, Quantity: ${item.quantity}, Price: ${item.price}")
-            }
-            println()
-        }
-    }
+    // Define a private helper function to format the shopping list as a string
+  private fun formatListString(listToFormat : List<ShoppingList>) : String =
+      listToFormat
+          .joinToString ( separator = "\n" ) {ShoppingList ->
+              lists.indexOf(ShoppingList).toString() + ": " + ShoppingList.toString()}
 
 }
+
+
+
+
+

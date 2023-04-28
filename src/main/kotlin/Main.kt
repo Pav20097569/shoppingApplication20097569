@@ -6,7 +6,11 @@ import controllers.ListAPI
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import models.Item
+import models.ShoppingList
 import kotlin.random.Random
+
+
+private val listAPI = ListAPI()
 fun main(args: Array<String>) {
     runMenu()
 }
@@ -15,7 +19,7 @@ fun runMenu(){
     do{
         val option = mainMenu()
         when (option) {
-            1 -> createShoppingList()
+            1 -> addShoppingList()
             2 -> addItemToList()
             3 -> removeItemFromList()
             4 -> editItemOnList()
@@ -57,13 +61,21 @@ return readNextInt(
 }
 
 
-fun createShoppingList() {
+fun addShoppingList() {
     val listId = Random.nextInt()
-    var listName = readNextLine("Enter a name for the Shopping List:  ")
+    val listName = readNextLine("Enter a name for the Shopping List:  ")
+    val author = readNextLine("Enter Your Name: ")
     val currentDateTime = LocalDateTime.now()
     val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
     val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+    val isAdded = listAPI.add(ShoppingList(listId,listName,author))
     println("New shopping list '$listName' created on ${currentDateTime.format(dateFormatter)} at ${currentDateTime.format(timeFormatter)} with ID: '$listId' ")
+
+    if (isAdded) {
+        println("Added Successfully")
+    } else {
+        println("Add Failed")
+    }
 }
 
 fun addItemToList() {
@@ -114,7 +126,7 @@ fun calculateTotalPrice() {
 
 
 fun listAllShoppingLists() {
-
+    println(listAPI.listAllShoppingLists())
 }
 fun exitApp(){
     println("Exiting...bye")
