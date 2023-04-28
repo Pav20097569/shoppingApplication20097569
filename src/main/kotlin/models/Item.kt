@@ -1,6 +1,8 @@
 package models
 data class Item(
-        val name: String,
-        val price: Double,
-        val quantity: Int
-    )
+    var name: String,
+    var quantity: Int,
+    var price: Double
+)
+
+
