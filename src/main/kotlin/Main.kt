@@ -1,31 +1,30 @@
-import java.util.*
 import ScannerInput.readNextInt
 import ScannerInput.readNextLine
 import ScannerInput.readNextDouble
 import controllers.ListAPI
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import models.Item
 import models.ShoppingList
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.random.Random
 
 
 private val listAPI = ListAPI()
-fun main(args: Array<String>) {
-    runMenu()
-}
+fun main() = runMenu()
+
 
 fun runMenu(){
     do{
         val option = mainMenu()
         when (option) {
             1 -> addShoppingList()
-            2 -> addItemToList()
-            3 -> removeItemFromList()
-            4 -> editItemOnList()
-            5 -> displayShoppingList()
-            6 -> calculateTotalPrice()
-            7 -> listAllShoppingLists()
+            2 -> updateShoppingList()
+            //3 -> addItem()
+            4 -> removeItemFromList()
+            5 -> editItemOnList()
+            6 -> displayShoppingList()
+            7 -> calculateTotalPrice()
+            8 -> listAllShoppingLists()
             0 -> exitApp()
 
 
@@ -36,8 +35,7 @@ fun runMenu(){
 
 
 
-fun mainMenu() : Int {
-return readNextInt(
+fun mainMenu() = readNextInt(
 
    """
             -------------------------------------
@@ -58,7 +56,9 @@ return readNextInt(
             -------------------------------------
             ==>> """.trimMargin(">")
    )
-}
+
+
+
 
 
 fun addShoppingList() {
@@ -68,7 +68,9 @@ fun addShoppingList() {
     val currentDateTime = LocalDateTime.now()
     val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
     val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+
     val isAdded = listAPI.add(ShoppingList(listId,listName,author))
+
     println("New shopping list '$listName' created on ${currentDateTime.format(dateFormatter)} at ${currentDateTime.format(timeFormatter)} with ID: '$listId' ")
 
     if (isAdded) {
@@ -78,24 +80,16 @@ fun addShoppingList() {
     }
 }
 
-fun addItemToList() {
-    val selectedList = ListAPI().selectShoppingList()
-    if (selectedList == null) {
-        println("No shopping list selected.")
-        return
+fun listAllShoppingLists() {
+    println(listAPI.listAllShoppingLists())
+}
+
+fun updateShoppingList(){
+
     }
 
-    // Read the item details from the user
-    var itemName = readNextLine("Enter the name of the item: ")
-    var quantity = readNextInt("Enter the quantity of the item: ")
-    var price = readNextDouble("Enter the price of the item: ")
 
-    // Create a new Item object and add it to the selected list
-    var newItem = Item(itemName,quantity, price)
-    selectedList.items.add(newItem)
 
-    println("Item '$itemName' added to the '${selectedList.listName}' shopping list.")
-}
 
 
 
@@ -124,10 +118,6 @@ fun calculateTotalPrice() {
     // code to calculate the total price of the shopping list with name "listName"
 }
 
-
-fun listAllShoppingLists() {
-    println(listAPI.listAllShoppingLists())
-}
 fun exitApp(){
     println("Exiting...bye")
     System.exit(0)

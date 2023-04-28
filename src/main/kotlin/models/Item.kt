@@ -1,8 +1,11 @@
 package models
 data class Item(
-    var name: String,
+    var itemID: Int,
+    var itemName: String,
     var quantity: Int,
     var price: Double
 )
+{
 
+}
 

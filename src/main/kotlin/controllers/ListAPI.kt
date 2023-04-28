@@ -1,21 +1,26 @@
 package controllers
 
+import ScannerInput.readNextDouble
 import models.ShoppingList
 import java.util.*
 import kotlin.collections.ArrayList
 import ScannerInput.readNextInt
 import models.Item
+import utils.Utilities.formatListString
+
 
 class ListAPI {
-    private val scanner = Scanner(System.`in`)
-    private val lists = ArrayList<ShoppingList>()
-
-
-
+    private var lists = ArrayList<ShoppingList>()
+    private fun formatListString(listToFormat : List<ShoppingList>) : String =
+        listToFormat.joinToString ( separator = "\n" ) {shoppingList -> lists.indexOf(shoppingList).toString() + ": " + shoppingList.toString()}
 
     fun add(shoppingList: ShoppingList): Boolean {
         return lists.add(shoppingList)
     }
+
+    fun listAllShoppingLists(): String =
+        if (lists.isEmpty()) "There are no shopping lists created yet."
+        else formatListString(lists)
 
     fun findShoppingListById(id: Int): ShoppingList? {
         for (shoppingList in lists) {
@@ -25,12 +30,6 @@ class ListAPI {
         }
         return null
     }
-
-    fun listAllShoppingLists(): String =
-        if (lists.isEmpty()) "There are no shopping lists created yet."
-            else formatListString(lists)
-
-
     fun selectShoppingList(): ShoppingList? {
         if (lists.isEmpty()) {
             println("There are no shopping lists created yet.")
@@ -57,10 +56,6 @@ class ListAPI {
     }
 
     // Define a private helper function to format the shopping list as a string
-  private fun formatListString(listToFormat : List<ShoppingList>) : String =
-      listToFormat
-          .joinToString ( separator = "\n" ) {ShoppingList ->
-              lists.indexOf(ShoppingList).toString() + ": " + ShoppingList.toString()}
 
 }
 
