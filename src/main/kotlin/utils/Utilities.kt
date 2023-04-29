@@ -11,11 +11,10 @@ object Utilities {
     @JvmStatic
     fun formatListString(listToFormat: List<ShoppingList>): String =
         listToFormat
-            .joinToString(separator = "\n") { shoppingList ->  "$shoppingList" }
+            .joinToString(separator = "\n") { shoppingList -> "$shoppingList" }
 
     @JvmStatic
     fun formatSetString(itemsToFormat: Set<Item>): String =
         itemsToFormat
-            .joinToString(separator = "\n") { item ->  "\t$item" }
-
+            .joinToString(separator = "\n") { item -> "\t$item" }
 }

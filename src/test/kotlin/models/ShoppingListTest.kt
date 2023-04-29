@@ -1,13 +1,12 @@
 package models
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
 
 class ShoppingListTest {
     @Test
     fun `test addItem adds the item to the shopping list`() {
         val shoppingList = ShoppingList(1, "My List", "John Doe")
-        val item = Item(1,"Eggs", 5, 2.00)
+        val item = Item(1, "Eggs", 5, 2.00)
         shoppingList.addItem(item)
         assertEquals(1, shoppingList.items.size)
         assertTrue(shoppingList.items.contains(item))
@@ -57,4 +56,3 @@ class ShoppingListTest {
         assertEquals(expectedList, shoppingList.listItems())
     }
 }
-

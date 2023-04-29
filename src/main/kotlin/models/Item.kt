@@ -5,7 +5,3 @@ data class Item(
     var quantity: Int,
     var price: Double
 )
-{
-
-}
-

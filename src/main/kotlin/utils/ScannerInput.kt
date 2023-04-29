@@ -1,5 +1,5 @@
 import java.lang.NumberFormatException
-import java.util.*
+import java.util.Scanner
 
 /* This class provides methods for the robust handling of I/O using Scanner.
 * It creates a new Scanner object for each read from the user, thereby eliminating the Scanner bug

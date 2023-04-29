@@ -1,6 +1,6 @@
+import ScannerInput.readNextDouble
 import ScannerInput.readNextInt
 import ScannerInput.readNextLine
-import ScannerInput.readNextDouble
 import controllers.ListAPI
 import models.Item
 import models.ShoppingList
@@ -45,8 +45,8 @@ fun mainMenu() = readNextInt(
         |   10. Load File                   |
         |   20. Save File                   |
         -------------------------------------
-        ==>> """.trimMargin(">"))
-
+        ==>> """.trimMargin(">")
+)
 
 fun shoppingListOptions() {
 
@@ -61,7 +61,8 @@ fun shoppingListOptions() {
         |   3. Delete shopping list         |
         |   0. Back to main menu            |
         -------------------------------------
-        ==>> """.trimMargin(">"))
+        ==>> """.trimMargin(">")
+    )
 
     when (option) {
         1 -> addShoppingList()
@@ -84,7 +85,8 @@ fun itemOptions() {
         |   3. Edit Item                    |
         |   0. Back to main menu            |
         -------------------------------------
-        ==>> """.trimMargin(">"))
+        ==>> """.trimMargin(">")
+    )
 
     when (option) {
         1 -> addItem()
@@ -148,7 +150,7 @@ fun addShoppingList() {
     val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
     // Adds the new shopping list and prints a success message
-    val isAdded = listAPI.add(ShoppingList(listId,listName,author))
+    val isAdded = listAPI.add(ShoppingList(listId, listName, author))
     println("New shopping list '$listName' created on ${currentDateTime.format(dateFormatter)} at ${currentDateTime.format(timeFormatter)} with ID: '$listId' ")
 
     if (isAdded) {
@@ -210,11 +212,10 @@ fun removeListItem() {
     }
 }
 
-
-//Function to edit an item on a shopping list by ShoppingListId and item Index
+// Function to edit an item on a shopping list by ShoppingListId and item Index
 fun editItemOnList() {
     listAllLists()
-    if(!checkLists()) {
+    if (!checkLists()) {
         return
     }
     val shoppingList: ShoppingList? = listAPI.findShoppingListById(readNextInt("Enter the ID of the shopping list to edit an item on: "))
@@ -225,25 +226,22 @@ fun editItemOnList() {
     val newPrice = readNextDouble("Please enter the New Price of the Item: ")
     val newQuantity = readNextInt("Please enter the new amount of the item: ")
 
-    if(shoppingList?. updateItem(itemIndex, Item(itemID = itemIndex,itemName = newItemName, price = newPrice, quantity = newQuantity)) == true) {
+    if (shoppingList?. updateItem(itemIndex, Item(itemID = itemIndex, itemName = newItemName, price = newPrice, quantity = newQuantity)) == true) {
         println("Item Updated!")
     }
 }
 
 // Shows the count of total amount of Shopping Lists
 fun amountOfLists() {
-    println("        Current  Amount of Shopping Lists in the System: "  + listAPI.amountOfLists())
+    println("        Current  Amount of Shopping Lists in the System: " + listAPI.amountOfLists())
 }
 
-
-
-fun exitApp(){
+fun exitApp() {
     println("Exiting...bye")
     exitProcess(0)
 }
 
-
-//Saves to file
+// Saves to file
 fun save() {
     try {
         listAPI.store()
@@ -252,7 +250,7 @@ fun save() {
     }
 }
 
-//Loads from File
+// Loads from File
 fun load() {
     try {
         listAPI.load()
