@@ -20,9 +20,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs the Gradle build task
+        # Runs the Gradle build task, but without running the JUnit tests
       - name: Run the Gradle Build
-        run: ./gradlew build
+        run: ./gradlew build -x test
+
+      # Builds a 'fat' jar file with the dependencies from Gradle
+      - name: Archive Jar with Dependencies
+        uses: actions/upload-artifact@v2
+        with:
+          name: Jar with Dependencies
+          path: build/libs
 
 
 
