@@ -238,10 +238,6 @@ fun save() {
     }
 }
 
-/**
- * Loads the receipt API state from a file.
- * If an error occurs, prints an error message to standard error.
- */
 fun load() {
     try {
         listAPI.load()
