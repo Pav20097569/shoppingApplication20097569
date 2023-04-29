@@ -18,14 +18,9 @@ fun runMenu(){
     do{
         val option = mainMenu()
         when (option) {
-            1 -> addShoppingList()
-            2 -> updateShoppingList()
-            3 -> addItem()
-            4 -> removeItemFromList()
-            5 -> editItemOnList()
-            6 -> displayShoppingList()
-            7 -> calculateTotalPrice()
-            8 -> listAllLists()
+            1 -> ShoppingListOptions()
+            2 -> ItemOptions()
+            3 -> listAllLists()
             0 -> exitApp()
 
 
@@ -37,27 +32,62 @@ fun runMenu(){
 
 
 fun mainMenu() = readNextInt(
-
     """
-            -------------------------------------
-            |      SHOPPING APP MENU            |
-            -------------------------------------
-            | Options:                          |
-            |   1. Create a new shopping list   |
-            |   2. Update Shopping List Details      |
-            |   3. Add an item to a list        |
-            |   4. Remove an item from a list   |
-            |   5. Edit an item on a list       |
-            |   6. Display shopping list        |
-            |   7. Calculate total price        |
-            |  -------------------------------  |
-            |   8. List All Shopping Lists      |      
-            |                                   |
-            |                                   |
-            |   0. Exit                         |
-            -------------------------------------
-            ==>> """.trimMargin(">")
-)
+        -------------------------------------
+        |      SHOPPING APP MENU            |
+        -------------------------------------
+        | Options:                          |
+        |   1. Shopping list options        |
+        |   2. Item Options                 |
+        |   3. List All Shopping Lists      |
+        |   0. Exit                         |
+        -------------------------------------
+        ==>> """.trimMargin(">"))
+
+fun ShoppingListOptions(){
+    val option = readNextInt(
+        """
+        -------------------------------------
+        |      SHOPPING LIST OPTIONS        |
+        -------------------------------------
+        | Options:                          |
+        |   1. Add Shopping List            |
+        |   2. Update shopping list         |
+        |   3. Delete shopping list         |
+        |   4. Calculate Total Price
+        |   0. Back to main menu            |
+        -------------------------------------
+        ==>> """.trimMargin(">"))
+
+    when (option) {
+        1 -> addShoppingList()
+        2 -> updateShoppingList()
+        3 -> removeItemFromList()
+        4 -> calculateTotalPrice()
+        0 -> mainMenu()
+    }
+}
+
+
+fun ItemOptions() {
+    val option = readNextInt(
+    """
+        -------------------------------------
+        |         ITEM OPTIONS              |
+        -------------------------------------
+        | Options:                          |
+        |   1. Add Item to List             |
+        |   2. Remove Item from List        |
+        |   0. Back to main menu            |
+        -------------------------------------
+        ==>> """.trimMargin(">"))
+
+    when (option) {
+        1 -> addItem()
+        2 -> removeItemFromList()
+        0 ->mainMenu()
+    }
+}
 
 
 
