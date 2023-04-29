@@ -2,8 +2,6 @@ package controllers
 
 import models.ShoppingList
 import org.junit.jupiter.api.AfterEach
-
-
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -15,9 +13,8 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-
-class ListApiTest {
-    private  val listId = Random.nextInt()
+class ListAPITest {
+    private val listId = Random.nextInt()
     private var tescoShoppingList: ShoppingList? = null
     private var lidlShoppingList: ShoppingList? = null
     private var christmasShoppingList: ShoppingList? = null
@@ -25,25 +22,23 @@ class ListApiTest {
     private var populatedShoppingList: ListAPI = ListAPI(JSONSerializer(File("ShoppingLists.json")))
     private var emptyShoppingList: ListAPI = ListAPI(JSONSerializer(File("ShoppingLists.json")))
 
-
     @BeforeEach
     fun setup() {
-        tescoShoppingList = ShoppingList(Random.nextInt(),"tescoList", "John" )
-        lidlShoppingList = ShoppingList(Random.nextInt(),"lidlShopping", "Paul")
-        christmasShoppingList = ShoppingList(Random.nextInt(),"ShoppingforToys", "Katie")
-//add lists to the api
+        tescoShoppingList = ShoppingList(Random.nextInt(), "tescoList", "John")
+        lidlShoppingList = ShoppingList(Random.nextInt(), "lidlShopping", "Paul")
+        christmasShoppingList = ShoppingList(Random.nextInt(), "ShoppingforToys", "Katie")
+// add lists to the api
 
         populatedShoppingList!!.add(tescoShoppingList!!)
         populatedShoppingList!!.add(lidlShoppingList!!)
         populatedShoppingList!!.add(christmasShoppingList!!)
-
     }
-        @AfterEach
-        fun ending(){
-            tescoShoppingList = null
-            lidlShoppingList = null
-            christmasShoppingList = null
-        }
+    @AfterEach
+    fun ending() {
+        tescoShoppingList = null
+        lidlShoppingList = null
+        christmasShoppingList = null
+    }
 
     @Nested
     inner class AddShoppingList {
@@ -111,7 +106,7 @@ class ListApiTest {
         @Test
         fun `populated list should return correctly formatted string`() {
             val result = populatedShoppingList.listAllShoppingLists()
-            val expected = "0: ${tescoShoppingList.toString()}\n1: ${lidlShoppingList.toString()}\n2: ${christmasShoppingList.toString()}"
+            val expected = "0: ${tescoShoppingList}\n1: ${lidlShoppingList}\n2: $christmasShoppingList"
             assertEquals(expected, result)
         }
     }
@@ -152,7 +147,3 @@ class ListApiTest {
         }
     }
 }
-
-
-
-

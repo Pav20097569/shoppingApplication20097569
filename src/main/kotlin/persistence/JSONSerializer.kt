@@ -2,12 +2,11 @@ package persistence
 
 import com.thoughtworks.xstream.XStream
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver
-import models.ShoppingList
 import models.Item
+import models.ShoppingList
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
-
 
 class JSONSerializer(private val file: File) : Serializer {
 
