@@ -65,7 +65,7 @@ fun ShoppingListOptions(){
         1 -> addShoppingList()
         2 -> updateShoppingList()
         3 -> removeList()
-        5 -> calculateTotalPrice()
+    //    5 -> calculateTotalPrice()
         0 -> mainMenu()
     }
 }
@@ -214,12 +214,6 @@ fun editItemOnList() {
  }
 
 
-
-fun calculateTotalPrice() {
-    println("Enter the name of the shopping list to calculate the total price of:")
-    val listName = readLine()
-    // code to calculate the total price of the shopping list with name "listName"
-}
 
 fun exitApp(){
     println("Exiting...bye")
