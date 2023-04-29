@@ -41,17 +41,17 @@ class ListAPI(serializerType: Serializer) {
         return null
     }
 
- fun updateShoppingList(id: Int, updatedList: ShoppingList): Boolean {
-     val updateList = findShoppingListById(id)
+    fun updateShoppingList(id: Int, updatedList: ShoppingList): Boolean {
+        val updateList = findShoppingListById(id)
 
-     if (updateList != null) {
-         updateList.listName = updatedList.listName
-         updateList.author = updatedList.author
-         updateList.currentDateTime = updatedList.currentDateTime
-         return true
-     }
-     return false
- }
+        if (updateList != null) {
+            updateList.listName = updatedList.listName
+            updateList.author = updatedList.author
+            updateList.currentDateTime = updatedList.currentDateTime
+            return true
+        }
+        return false
+    }
 
 
     @Suppress("UNCHECKED_CAST")
