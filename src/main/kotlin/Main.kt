@@ -78,6 +78,7 @@ fun ItemOptions() {
         | Options:                          |
         |   1. Add Item to List             |
         |   2. Remove Item from List        |
+        |   3. Edit Item                    |
         |   0. Back to main menu            |
         -------------------------------------
         ==>> """.trimMargin(">"))
@@ -85,6 +86,7 @@ fun ItemOptions() {
     when (option) {
         1 -> addItem()
         2 -> removeItemFromList()
+        3 -> editItemOnList()
         0 ->mainMenu()
     }
 }
@@ -175,16 +177,35 @@ fun removeList(){
 
 
 fun removeItemFromList() {
-    println("Enter the name of the shopping list to remove an item from:")
-    val listName = readLine()
-    // code to remove an item from the shopping list with name "listName"
+    if (!checkLists()){
+        return
+    }
+    val shoppingList: ShoppingList? = listAPI.findShoppingListById(readNextInt("Please Enter the ID of  the Shopping List Containing the Product: "))
+    if( shoppingList != null){
+        println(shoppingList.listItems())
+        if(shoppingList.deleteItem(readNextInt("Please Enter The Index of the Item you wish to delete: ")))
+            println("Item Deleted")
+    }
 }
 
 fun editItemOnList() {
-    println("Enter the name of the shopping list to edit an item on:")
-    val listName = readLine()
-    // code to edit an item on the shopping list with name "listName"
-}
+    listAllLists()
+  if(!checkLists()) {
+  return
+  }
+      val shoppingList: ShoppingList? = listAPI.findShoppingListById(readNextInt("Enter the ID of the shopping list to edit an item on: "))
+  println(shoppingList?.listItems())
+
+      val itemIndex: Int = readNextInt("Please enter the Index of the Item you would like to Update: ")
+      val newItemName = readNextLine("Please enter the New Name of the Item: ")
+      val newPrice = readNextDouble("Please enter the New Price of the Item: ")
+      val newQuantity = readNextInt("Please enter the new amount of the item: ")
+
+      if(shoppingList?. updateItem(itemIndex, Item(itemID = itemIndex,itemName = newItemName, price = newPrice, quantity = newQuantity)) == true) {
+          println("Item Updated!")
+      }
+  }
+
 
 fun displayShoppingList() {
     println("Enter the name of the shopping list to display:")

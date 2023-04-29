@@ -35,7 +35,7 @@ data class ShoppingList(
 
 
 
-        fun updateProduct(id: Int, newItem: Item): Boolean{
+        fun updateItem(id: Int, newItem: Item): Boolean{
             val itemUpdate = findOne(id)
             if(itemUpdate != null) {
                 itemUpdate.itemName = newItem.itemName
