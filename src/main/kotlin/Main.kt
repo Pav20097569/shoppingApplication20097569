@@ -65,7 +65,7 @@ fun ShoppingListOptions(){
         1 -> addShoppingList()
         2 -> updateShoppingList()
         3 -> removeList()
-        4 -> calculateTotalPrice()
+        5 -> calculateTotalPrice()
         0 -> mainMenu()
     }
 }
@@ -154,7 +154,7 @@ fun updateShoppingList(){
     val listID = readNextInt(" Please Enter the ID of the Shopping List you are trying to Change: " )
 
     val newListName = readNextLine("Enter New Name for the Shopping List: ")
-    val  newAuthor = readNextLine("Enter your name please: ")
+    val newAuthor = readNextLine("Enter your name please: ")
     val newcurrentDateTime = LocalDateTime.now()
     val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
     val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
@@ -212,11 +212,6 @@ fun editItemOnList() {
 
      println("        Current  Amount of Shopping Lists in the System: "  + listAPI.amountOfLists())
  }
-fun displayShoppingList() {
-    println("Enter the name of the shopping list to display:")
-    val listName = readLine()
-    // code to display the shopping list with name "listName"
-}
 
 
 

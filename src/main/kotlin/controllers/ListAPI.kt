@@ -50,33 +50,6 @@ class ListAPI {
      }
      return false
  }
-
-
-
-    fun selectShoppingList(): ShoppingList? {
-        if (lists.isEmpty()) {
-            println("There are no shopping lists created yet.")
-            return null
-        }
-
-        // Print all the shopping lists with their ID and name
-        println("Available shopping lists: ")
-        for (shoppingList in lists) {
-            println("ID: ${shoppingList.listId}, Name: ${shoppingList.listName}")
-        }
-
-        // Read the user's input for the list ID to select
-        val listId = readNextInt("Enter the ID of the shopping list to select: ")
-
-        // Find the shopping list with the given ID
-        val selectedList = findShoppingListById(listId)
-        if (selectedList == null) {
-            println("Invalid shopping list ID entered.")
-            return null // Return null if the shopping list is not found
-        }
-
-        return selectedList // Return the selected shopping list
-    }
 }
 
 
