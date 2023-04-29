@@ -6,7 +6,7 @@ data class ShoppingList(
     val listId: Int,
     var listName: String,
     var author: String,
-    val currentDateTime: LocalDateTime = LocalDateTime.now(), // default to current date
+    var currentDateTime: LocalDateTime = LocalDateTime.now(), // default to current date
     var items: MutableSet<Item> = mutableSetOf())
     {
 
@@ -16,6 +16,7 @@ data class ShoppingList(
      // Add an ID to an Item
         private fun getItemId() = lastItemID++
     //Add new Item
+
     fun addItem(item: Item): Boolean{
         item.itemID = getItemId()
         return items.add(item)
@@ -33,7 +34,8 @@ data class ShoppingList(
         }
 
 
-        fun updateProduct(id: Int, newItem: Item): Boolean{
+
+        fun updateItem(id: Int, newItem: Item): Boolean{
             val itemUpdate = findOne(id)
             if(itemUpdate != null) {
                 itemUpdate.itemName = newItem.itemName
