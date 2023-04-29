@@ -21,6 +21,7 @@ fun runMenu(){
             1 -> ShoppingListOptions()
             2 -> ItemOptions()
             3 -> listAllLists()
+            4 -> amountOfLists()
             0 -> exitApp()
 
 
@@ -40,6 +41,7 @@ fun mainMenu() = readNextInt(
         |   1. Shopping list options        |
         |   2. Item Options                 |
         |   3. List All Shopping Lists      |
+        |   4. Amount of Shopping Lists     |
         |   0. Exit                         |
         -------------------------------------
         ==>> """.trimMargin(">"))
@@ -206,7 +208,10 @@ fun editItemOnList() {
       }
   }
 
+ fun amountOfLists() {
 
+     println("        Current  Amount of Shopping Lists in the System: "  + listAPI.amountOfLists())
+ }
 fun displayShoppingList() {
     println("Enter the name of the shopping list to display:")
     val listName = readLine()
