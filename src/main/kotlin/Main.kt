@@ -73,7 +73,7 @@ fun ShoppingListOptions(){
         1 -> addShoppingList()
         2 -> updateShoppingList()
         3 -> removeList()
-    //    5 -> calculateTotalPrice()
+        //    5 -> calculateTotalPrice()
         0 -> mainMenu()
     }
 }
@@ -81,7 +81,7 @@ fun ShoppingListOptions(){
 
 fun ItemOptions() {
     val option = readNextInt(
-    """
+        """
         -------------------------------------
         |         ITEM OPTIONS              |
         -------------------------------------
@@ -159,6 +159,7 @@ fun updateShoppingList(){
     if(!checkLists()) {
         return
     }
+
     val listID = readNextInt(" Please Enter the ID of the Shopping List you are trying to Change: " )
 
     val newListName = readNextLine("Enter New Name for the Shopping List: ")
@@ -200,26 +201,26 @@ fun removeItemFromList() {
 
 fun editItemOnList() {
     listAllLists()
-  if(!checkLists()) {
-  return
-  }
-      val shoppingList: ShoppingList? = listAPI.findShoppingListById(readNextInt("Enter the ID of the shopping list to edit an item on: "))
-  println(shoppingList?.listItems())
+    if(!checkLists()) {
+        return
+    }
+    val shoppingList: ShoppingList? = listAPI.findShoppingListById(readNextInt("Enter the ID of the shopping list to edit an item on: "))
+    println(shoppingList?.listItems())
 
-      val itemIndex: Int = readNextInt("Please enter the Index of the Item you would like to Update: ")
-      val newItemName = readNextLine("Please enter the New Name of the Item: ")
-      val newPrice = readNextDouble("Please enter the New Price of the Item: ")
-      val newQuantity = readNextInt("Please enter the new amount of the item: ")
+    val itemIndex: Int = readNextInt("Please enter the Index of the Item you would like to Update: ")
+    val newItemName = readNextLine("Please enter the New Name of the Item: ")
+    val newPrice = readNextDouble("Please enter the New Price of the Item: ")
+    val newQuantity = readNextInt("Please enter the new amount of the item: ")
 
-      if(shoppingList?. updateItem(itemIndex, Item(itemID = itemIndex,itemName = newItemName, price = newPrice, quantity = newQuantity)) == true) {
-          println("Item Updated!")
-      }
-  }
+    if(shoppingList?. updateItem(itemIndex, Item(itemID = itemIndex,itemName = newItemName, price = newPrice, quantity = newQuantity)) == true) {
+        println("Item Updated!")
+    }
+}
 
- fun amountOfLists() {
+fun amountOfLists() {
 
-     println("        Current  Amount of Shopping Lists in the System: "  + listAPI.amountOfLists())
- }
+    println("        Current  Amount of Shopping Lists in the System: "  + listAPI.amountOfLists())
+}
 
 
 
@@ -238,10 +239,6 @@ fun save() {
     }
 }
 
-/**
- * Loads the receipt API state from a file.
- * If an error occurs, prints an error message to standard error.
- */
 fun load() {
     try {
         listAPI.load()
