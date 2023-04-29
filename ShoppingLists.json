@@ -1,0 +1,1 @@
+{"object-stream":{"list":[{"models.ShoppingList":{"listId":329065754,"listName":"Pawel","author":"Pawel","currentDateTime":"2023-04-29T14:34:19.0832079","items":[{"@class":"linked-hash-set","models.Item":{"itemID":0,"itemName":"Pawel","quantity":1,"price":12}}],"lastItemID":1}}]}}

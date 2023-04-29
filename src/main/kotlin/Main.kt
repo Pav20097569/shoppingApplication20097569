@@ -4,13 +4,16 @@ import ScannerInput.readNextDouble
 import controllers.ListAPI
 import models.Item
 import models.ShoppingList
+import persistence.JSONSerializer
+import java.io.File
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.random.Random
-import java.util.*
 
 
-private val listAPI = ListAPI()
+
+private val listAPI = ListAPI(JSONSerializer(File("ShoppingLists.json")))
+
 fun main() = runMenu()
 
 
@@ -22,6 +25,8 @@ fun runMenu(){
             2 -> ItemOptions()
             3 -> listAllLists()
             4 -> amountOfLists()
+            10 -> load()
+            20 -> save()
             0 -> exitApp()
 
 
@@ -44,6 +49,9 @@ fun mainMenu() = readNextInt(
         |   4. Amount of Shopping Lists     |
         |   0. Exit                         |
         -------------------------------------
+        |   10. Load File                   |
+        |   20. Save File                   |
+        -------------------------------------
         ==>> """.trimMargin(">"))
 
 fun ShoppingListOptions(){
@@ -65,7 +73,7 @@ fun ShoppingListOptions(){
         1 -> addShoppingList()
         2 -> updateShoppingList()
         3 -> removeList()
-        4 -> calculateTotalPrice()
+    //    5 -> calculateTotalPrice()
         0 -> mainMenu()
     }
 }
@@ -154,7 +162,7 @@ fun updateShoppingList(){
     val listID = readNextInt(" Please Enter the ID of the Shopping List you are trying to Change: " )
 
     val newListName = readNextLine("Enter New Name for the Shopping List: ")
-    val  newAuthor = readNextLine("Enter your name please: ")
+    val newAuthor = readNextLine("Enter your name please: ")
     val newcurrentDateTime = LocalDateTime.now()
     val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
     val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
@@ -212,21 +220,32 @@ fun editItemOnList() {
 
      println("        Current  Amount of Shopping Lists in the System: "  + listAPI.amountOfLists())
  }
-fun displayShoppingList() {
-    println("Enter the name of the shopping list to display:")
-    val listName = readLine()
-    // code to display the shopping list with name "listName"
-}
 
 
-
-fun calculateTotalPrice() {
-    println("Enter the name of the shopping list to calculate the total price of:")
-    val listName = readLine()
-    // code to calculate the total price of the shopping list with name "listName"
-}
 
 fun exitApp(){
     println("Exiting...bye")
     System.exit(0)
+}
+
+
+
+fun save() {
+    try {
+        listAPI.store()
+    } catch (e: Exception) {
+        System.err.println("Error writing to file: $e")
+    }
+}
+
+/**
+ * Loads the receipt API state from a file.
+ * If an error occurs, prints an error message to standard error.
+ */
+fun load() {
+    try {
+        listAPI.load()
+    } catch (e: Exception) {
+        System.err.println("Error reading from file: $e")
+    }
 }

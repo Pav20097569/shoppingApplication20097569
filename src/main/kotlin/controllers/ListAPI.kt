@@ -1,16 +1,18 @@
 package controllers
 
-import ScannerInput.readNextDouble
+
 import models.ShoppingList
 import java.util.*
 import kotlin.collections.ArrayList
-import ScannerInput.readNextInt
-import models.Item
-import utils.Utilities.formatListString
+
+import persistence.Serializer
 
 
-class ListAPI {
+
+class ListAPI(serializerType: Serializer) {
     private var lists = ArrayList<ShoppingList>()
+
+    private var serializer: Serializer = serializerType
     private fun formatListString(listToFormat : List<ShoppingList>) : String =
         listToFormat.joinToString ( separator = "\n" ) {shoppingList -> lists.indexOf(shoppingList).toString() + ": " + shoppingList.toString()}
 
@@ -52,30 +54,15 @@ class ListAPI {
  }
 
 
+    @Suppress("UNCHECKED_CAST")
+    @Throws(Exception::class)
+    fun load() {
+        lists = serializer.read() as ArrayList<ShoppingList>
+    }
 
-    fun selectShoppingList(): ShoppingList? {
-        if (lists.isEmpty()) {
-            println("There are no shopping lists created yet.")
-            return null
-        }
-
-        // Print all the shopping lists with their ID and name
-        println("Available shopping lists: ")
-        for (shoppingList in lists) {
-            println("ID: ${shoppingList.listId}, Name: ${shoppingList.listName}")
-        }
-
-        // Read the user's input for the list ID to select
-        val listId = readNextInt("Enter the ID of the shopping list to select: ")
-
-        // Find the shopping list with the given ID
-        val selectedList = findShoppingListById(listId)
-        if (selectedList == null) {
-            println("Invalid shopping list ID entered.")
-            return null // Return null if the shopping list is not found
-        }
-
-        return selectedList // Return the selected shopping list
+    @Throws(Exception::class)
+    fun store() {
+        serializer.write(lists)
     }
 }
 
