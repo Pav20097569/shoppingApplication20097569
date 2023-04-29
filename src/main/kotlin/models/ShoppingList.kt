@@ -43,3 +43,11 @@ data class ShoppingList(
         if (items.isEmpty()) "\t No Items Found"
         else items.mapIndexed { index, item -> "$index : $item" }.joinToString(separator = "\n")
 }
+
+
+/**
+ * Author: Pawel Jaglarz
+ * Version: 3.0
+ * Description: This file contains the implementation of the ShoppingList data class, which represents a shopping list with a unique ID, name, author, creation date, and a set of items.
+ * Usage: The ShoppingList class is used to create and manage individual shopping lists, and is used by the ListAPI class to store and retrieve shopping list data.
+ */

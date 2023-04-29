@@ -70,3 +70,10 @@ class ListAPI(serializerType: Serializer) {
         serializer.write(lists)
     }
 }
+
+/**
+ * Author: Pawel Jaglarz
+ * Version: 3.0
+ * Description: This file contains the implementation of the ListAPI class, which provides methods for managing shopping lists.
+ * Usage: The ListAPI class is instantiated with a JSONSerializer object, which loads and saves shopping list data to a JSON file. The class provides methods for adding, deleting, and updating shopping lists and their items.
+*/

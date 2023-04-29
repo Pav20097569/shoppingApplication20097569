@@ -147,3 +147,11 @@ class ListAPITest {
         }
     }
 }
+
+
+/**
+ * Author: Pawel Jaglarz
+ * Version: 3.0
+ * Description: This file contains the test cases for the ListAPI class, which test the methods for adding, deleting, and updating shopping lists and their items.
+ * Usage: The ListAPI test cases are run using a testing framework such as JUnit, and verify that the ListAPI methods behave as expected.
+ */

@@ -58,3 +58,10 @@ class ShoppingListTest {
         assertEquals(expectedList, shoppingList.listItems())
     }
 }
+
+/**
+ * Author: Pawel Jaglarz
+ * Version: 3.0
+ * Description: This file contains the test cases for the ShoppingList class, which test the methods for adding, deleting, and updating items in a shopping list.
+ * Usage: The ShoppingList test cases are run using a testing framework such as JUnit, and verify that the ShoppingList methods behave as expected.
+ */
