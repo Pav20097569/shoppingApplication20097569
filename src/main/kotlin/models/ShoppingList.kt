@@ -25,8 +25,6 @@ data class ShoppingList(
             return items.removeIf {item -> item.itemID == id}
         }
 
-        fun numItems() = items.size
-
 
 
         fun findOne(id: Int): Item? {
