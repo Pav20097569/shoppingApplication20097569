@@ -18,8 +18,12 @@ class ListAPI {
         return lists.add(shoppingList)
     }
 
+    fun amountOfLists(): Int{
+        return lists.size
+    }
+
     fun listAllShoppingLists(): String =
-        if (lists.isEmpty()) "There are no shopping lists created yet."
+        if (lists.isEmpty()) "No Shopping Lists Stored"
         else formatListString(lists)
 
     fun findShoppingListById(id: Int): ShoppingList? {
@@ -30,6 +34,20 @@ class ListAPI {
         }
         return null
     }
+
+ fun updateShoppingList(id: Int, updatedList: ShoppingList): Boolean {
+     val updateList = findShoppingListById(id)
+     if (updateList != null) {
+         updateList.listName = updatedList.listName
+         updateList.author = updatedList.author
+         updateList.currentDateTime = updatedList.currentDateTime
+         return true
+     }
+     return false
+ }
+
+
+
     fun selectShoppingList(): ShoppingList? {
         if (lists.isEmpty()) {
             println("There are no shopping lists created yet.")
@@ -54,9 +72,6 @@ class ListAPI {
 
         return selectedList // Return the selected shopping list
     }
-
-    // Define a private helper function to format the shopping list as a string
-
 }
 
 

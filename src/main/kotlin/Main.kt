@@ -7,6 +7,7 @@ import models.ShoppingList
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.random.Random
+import java.util.*
 
 
 private val listAPI = ListAPI()
@@ -24,7 +25,7 @@ fun runMenu(){
             5 -> editItemOnList()
             6 -> displayShoppingList()
             7 -> calculateTotalPrice()
-            8 -> listAllShoppingLists()
+            8 -> listAllLists()
             0 -> exitApp()
 
 
@@ -59,7 +60,14 @@ fun mainMenu() = readNextInt(
 
 
 
-
+fun checkLists(): Boolean {
+    val lists = listAPI.listAllShoppingLists()
+    if (lists == "No Shopping Lists Stored"){
+        println(lists)
+        return false
+    }
+    return true
+}
 
 fun addShoppingList() {
     val listId = Random.nextInt()
@@ -80,21 +88,16 @@ fun addShoppingList() {
     }
 }
 
-fun listAllShoppingLists() {
+fun listAllLists() {
     println(listAPI.listAllShoppingLists())
 }
 
 fun updateShoppingList(){
-
+    if(!checkLists()){
+        return
     }
 
-
-
-
-
-
-
-fun removeItemFromList() {
+}fun removeItemFromList() {
     println("Enter the name of the shopping list to remove an item from:")
     val listName = readLine()
     // code to remove an item from the shopping list with name "listName"
@@ -111,6 +114,8 @@ fun displayShoppingList() {
     val listName = readLine()
     // code to display the shopping list with name "listName"
 }
+
+
 
 fun calculateTotalPrice() {
     println("Enter the name of the shopping list to calculate the total price of:")
