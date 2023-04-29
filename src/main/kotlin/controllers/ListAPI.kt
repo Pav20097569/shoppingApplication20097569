@@ -1,16 +1,18 @@
 package controllers
 
-import ScannerInput.readNextDouble
+
 import models.ShoppingList
 import java.util.*
 import kotlin.collections.ArrayList
-import ScannerInput.readNextInt
-import models.Item
-import utils.Utilities.formatListString
+
+import persistence.Serializer
 
 
-class ListAPI {
+
+class ListAPI(serializerType: Serializer) {
     private var lists = ArrayList<ShoppingList>()
+
+    private var serializer: Serializer = serializerType
     private fun formatListString(listToFormat : List<ShoppingList>) : String =
         listToFormat.joinToString ( separator = "\n" ) {shoppingList -> lists.indexOf(shoppingList).toString() + ": " + shoppingList.toString()}
 
@@ -50,6 +52,18 @@ class ListAPI {
      }
      return false
  }
+
+
+    @Suppress("UNCHECKED_CAST")
+    @Throws(Exception::class)
+    fun load() {
+        lists = serializer.read() as ArrayList<ShoppingList>
+    }
+
+    @Throws(Exception::class)
+    fun store() {
+        serializer.write(lists)
+    }
 }
 
 
