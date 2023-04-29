@@ -13,7 +13,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-class ListApiTest {
+class ListAPITest {
     private val listId = Random.nextInt()
     private var tescoShoppingList: ShoppingList? = null
     private var lidlShoppingList: ShoppingList? = null
