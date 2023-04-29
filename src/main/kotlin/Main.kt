@@ -20,7 +20,7 @@ fun runMenu(){
         when (option) {
             1 -> addShoppingList()
             2 -> updateShoppingList()
-            //3 -> addItem()
+            3 -> addItem()
             4 -> removeItemFromList()
             5 -> editItemOnList()
             6 -> displayShoppingList()
@@ -38,25 +38,26 @@ fun runMenu(){
 
 fun mainMenu() = readNextInt(
 
-   """
+    """
             -------------------------------------
             |      SHOPPING APP MENU            |
             -------------------------------------
             | Options:                          |
             |   1. Create a new shopping list   |
-            |   2. Add an item to a list        |
-            |   3. Remove an item from a list   |
-            |   4. Edit an item on a list       |
-            |   5. Display shopping list        |
-            |   6. Calculate total price  
+            |   2. Update Shopping List Details      |
+            |   3. Add an item to a list        |
+            |   4. Remove an item from a list   |
+            |   5. Edit an item on a list       |
+            |   6. Display shopping list        |
+            |   7. Calculate total price        |
             |  -------------------------------  |
-            |   7. List All Shopping Lists      |      
-            |   8.                              |
-            |   9.                              |
+            |   8. List All Shopping Lists      |      
+            |                                   |
+            |                                   |
             |   0. Exit                         |
             -------------------------------------
             ==>> """.trimMargin(">")
-   )
+)
 
 
 
@@ -68,7 +69,24 @@ fun checkLists(): Boolean {
     }
     return true
 }
+fun addItem() {
+    if (!checkLists()) {
+        return
+    }
+    val list: ShoppingList? = listAPI.findShoppingListById(readNextInt("Enter the ID of your Shopping List Please: "))
 
+
+    if (list != null) {
+        val itemId = Random.nextInt()
+        val itemName = readNextLine("Please Enter the Item Name: ")
+        val price = readNextDouble("Please Enter the Price of the Item: ")
+        val quantity = readNextInt("Please enter the amount of the Item you would like to add: ")
+        if (list.addItem(Item(itemID = itemId, itemName = itemName, price = price, quantity = quantity))){
+            println("$itemName Added To The Shopping List")
+        }
+
+    }
+}
 fun addShoppingList() {
     val listId = Random.nextInt()
     val listName = readNextLine("Enter a name for the Shopping List:  ")
@@ -88,16 +106,30 @@ fun addShoppingList() {
     }
 }
 
+
 fun listAllLists() {
     println(listAPI.listAllShoppingLists())
 }
 
 fun updateShoppingList(){
-    if(!checkLists()){
+    if(!checkLists()) {
         return
     }
+    val listID = readNextInt(" Please Enter the ID of the Shopping List you are trying to Change: " )
 
-}fun removeItemFromList() {
+    val newListName = readNextLine("Enter New Name for the Shopping List: ")
+    val  newAuthor = readNextLine("Enter your name please: ")
+    val newcurrentDateTime = LocalDateTime.now()
+    val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+
+    if(listAPI.updateShoppingList(listID,ShoppingList(listId = listID,listName = newListName, author = newAuthor, currentDateTime = newcurrentDateTime))){
+        println("Shopping List Successfully Updated")
+    }
+}
+
+
+fun removeItemFromList() {
     println("Enter the name of the shopping list to remove an item from:")
     val listName = readLine()
     // code to remove an item from the shopping list with name "listName"

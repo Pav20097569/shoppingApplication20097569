@@ -37,6 +37,7 @@ class ListAPI {
 
  fun updateShoppingList(id: Int, updatedList: ShoppingList): Boolean {
      val updateList = findShoppingListById(id)
+
      if (updateList != null) {
          updateList.listName = updatedList.listName
          updateList.author = updatedList.author
