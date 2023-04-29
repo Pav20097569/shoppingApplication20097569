@@ -18,6 +18,10 @@ class ListAPI {
         return lists.add(shoppingList)
     }
 
+    fun removeList(listDelete: ShoppingList): Boolean {
+        return lists.remove(listDelete)
+    }
+
     fun amountOfLists(): Int{
         return lists.size
     }

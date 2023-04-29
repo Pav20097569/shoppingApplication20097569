@@ -54,7 +54,7 @@ fun ShoppingListOptions(){
         |   1. Add Shopping List            |
         |   2. Update shopping list         |
         |   3. Delete shopping list         |
-        |   4. Calculate Total Price
+        |   4. Calculate Total Price        |
         |   0. Back to main menu            |
         -------------------------------------
         ==>> """.trimMargin(">"))
@@ -62,7 +62,7 @@ fun ShoppingListOptions(){
     when (option) {
         1 -> addShoppingList()
         2 -> updateShoppingList()
-        3 -> removeItemFromList()
+        3 -> removeList()
         4 -> calculateTotalPrice()
         0 -> mainMenu()
     }
@@ -100,6 +100,7 @@ fun checkLists(): Boolean {
     return true
 }
 fun addItem() {
+    listAllLists()
     if (!checkLists()) {
         return
     }
@@ -142,6 +143,7 @@ fun listAllLists() {
 }
 
 fun updateShoppingList(){
+    listAllLists()
     if(!checkLists()) {
         return
     }
@@ -155,6 +157,19 @@ fun updateShoppingList(){
 
     if(listAPI.updateShoppingList(listID,ShoppingList(listId = listID,listName = newListName, author = newAuthor, currentDateTime = newcurrentDateTime))){
         println("Shopping List Successfully Updated")
+    }
+}
+
+fun removeList(){
+    listAllLists()
+    if(!checkLists()) {
+        return
+    }
+    val shoppingList: ShoppingList? = listAPI.findShoppingListById(readNextInt("Please Enter the ID of the Shopping List You Wish to Remove: "))
+    if(shoppingList !=null){
+        if(listAPI.removeList(shoppingList)){
+            println("Shopping List Removed")
+        }
     }
 }
 
